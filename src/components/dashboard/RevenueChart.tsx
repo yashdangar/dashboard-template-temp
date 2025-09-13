@@ -21,6 +21,14 @@ export function RevenueChart() {
       <CardContent>
         <ChartContainer config={{}} className="h-32 md:h-40">
           <BarChart data={data}>
+            <defs>
+              <linearGradient id="revenueGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="oklch(0.6 0.35 180)" />
+                <stop offset="25%" stopColor="oklch(0.6 0.35 200)" />
+                <stop offset="50%" stopColor="oklch(0.5 0.3 270)" />
+                <stop offset="100%" stopColor="oklch(0.6 0.4 320)" />
+              </linearGradient>
+            </defs>
             <XAxis 
               dataKey="name" 
               axisLine={false}
@@ -31,7 +39,7 @@ export function RevenueChart() {
             <ChartTooltip content={<ChartTooltipContent />} />
             <Bar
               dataKey="value"
-              fill="hsl(var(--accent))"
+              fill="url(#revenueGradient)"
               radius={[2, 2, 0, 0]}
               className="animate-fade-in-up"
             />

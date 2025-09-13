@@ -23,37 +23,43 @@ export function ServiceCard({
   className 
 }: ServiceCardProps) {
   const serviceStyles = {
-    chipotle: "service-chipotle",
-    movies: "service-movies", 
-    flights: "service-flights",
-    others: "service-others"
+    chipotle: "service-gradient",
+    movies: "service-gradient", 
+    flights: "service-gradient",
+    others: "service-gradient"
+  };
+
+  const actionStyles = {
+    chipotle: "action-gradient",
+    movies: "action-gradient", 
+    flights: "action-gradient",
+    others: "action-gradient"
   };
 
   return (
-    <Card className={cn("transition-smooth hover:shadow-lg", className)}>
-      <CardContent className="p-3 md:p-6">
-        <div className="flex items-center justify-between mb-3 md:mb-4">
-          <div className="flex items-center space-x-2 md:space-x-3 min-w-0 flex-1">
-            <div className={cn("p-1.5 md:p-2 rounded-lg shrink-0", serviceStyles[variant])}>
-              <Icon className="h-4 w-4 md:h-5 md:w-5 text-white" />
+    <Card className={cn("bg-slate-900 border-slate-800 transition-smooth hover:shadow-lg", className)}>
+      <CardContent className="p-5 min-h-[152px]">
+        {/* Top Section */}
+        <div className="mb-5">
+          <h3 className="text-white text-lg font-semibold mb-1">{name}</h3>
+          <div className="flex items-center space-x-2">
+            <div className={cn("p-1 rounded", serviceStyles[variant])}>
+              <Icon className="h-4 w-4 text-white drop-shadow-sm" />
             </div>
-            <div className="min-w-0 flex-1">
-              <h3 className="font-semibold text-foreground text-sm md:text-base truncate">{name}</h3>
-              <p className="text-xs md:text-sm text-muted-foreground truncate">{category}</p>
-            </div>
+            <span className="text-white text-sm">{category}</span>
           </div>
-          {time && (
-            <span className="text-xs md:text-sm text-muted-foreground shrink-0 ml-2">{time}</span>
-          )}
         </div>
         
-        <Button 
-          variant="secondary" 
-          className="w-full text-xs md:text-sm"
-          size="sm"
-        >
-          {action}
-        </Button>
+         {/* Bottom Action Button */}
+         <button 
+           className={cn("flex items-center justify-between px-4 py-3 rounded-lg w-full text-left border-0 outline-none", actionStyles[variant])}
+           style={{color: '#ffffff'}}
+         >
+           {time && (
+             <span className="text-sm font-bold drop-shadow-md" style={{color: '#ffffff', textShadow: '0 1px 2px rgba(0,0,0,0.8)'}}>{time}</span>
+           )}
+           <span className="text-sm font-bold drop-shadow-md" style={{color: '#ffffff', textShadow: '0 1px 2px rgba(0,0,0,0.8)'}}>{action}</span>
+         </button>
       </CardContent>
     </Card>
   );

@@ -13,36 +13,48 @@ import { Utensils, Film, ShoppingBag } from "lucide-react";
 
 const Index = () => {
   const categoryMix = [
-    { name: "Food", value: 58 },
-    { name: "Movies", value: 24 },
-    { name: "Groceries", value: 12 },
-    { name: "Pharmacy", value: 6 },
+    { name: "Food", value: 35 },
+    { name: "Movies", value: 20 },
+    { name: "Groceries", value: 15 },
+    { name: "Pharmacy", value: 12 },
+    { name: "Electronics", value: 10 },
+    { name: "Clothing", value: 8 },
   ];
-  const colors = ["#6366F1", "#14B8A6", "#F59E0B", "#F43F5E"]; // indigo/teal/amber/rose
+  const colors = ["#156082", "#E97132", "#196B24", "#0F9ED5", "#A02B93", "#4EA72E"];
   
   // Chart config for legend
   const chartConfig = {
     Food: {
       label: "Food",
-      color: "#6366F1",
+      color: "#156082",
     },
     Movies: {
       label: "Movies", 
-      color: "#14B8A6",
+      color: "#E97132",
     },
     Groceries: {
       label: "Groceries",
-      color: "#F59E0B", 
+      color: "#196B24", 
     },
     Pharmacy: {
       label: "Pharmacy",
-      color: "#F43F5E",
+      color: "#0F9ED5",
+    },
+    Electronics: {
+      label: "Electronics",
+      color: "#A02B93",
+    },
+    Clothing: {
+      label: "Clothing",
+      color: "#4EA72E",
     },
   };
   const receivablesTop = [
     { reseller: "Acme Corp", balance: 1250.5 },
     { reseller: "Globex", balance: 890.0 },
     { reseller: "Umbrella Ltd", balance: 2210.0 },
+    { reseller: "Tech Solutions", balance: 1850.0 },
+    { reseller: "Global Systems", balance: 675.5 },
   ];
   const disputesRecent = [
     { id: "ORD-9003", reason: "Partial fulfillment" },
@@ -53,6 +65,8 @@ const Index = () => {
     { category: "Food", depth: 42 },
     { category: "Movies", depth: 18 },
     { category: "Groceries", depth: 12 },
+    { category: "Pharmacy", depth: 8 },
+    { category: "Electronics", depth: 15 },
   ];
   const RADIAN = Math.PI / 180;
   const renderCategoryLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
@@ -60,7 +74,7 @@ const Index = () => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
     return (
-      <text x={x} y={y} fill="#fff" textAnchor="middle" dominantBaseline="central" style={{ fontSize: 12, fontWeight: 600 }}>
+      <text x={x} y={y} fill="#fff" textAnchor="middle" dominantBaseline="central" style={{ fontSize: 10, fontWeight: 600 }}>
         {`${(percent * 100).toFixed(0)}%`}
       </text>
     );
@@ -68,20 +82,23 @@ const Index = () => {
   return (
     <DashboardLayout>
         {/* Dashboard Content - Same for All Screen Sizes */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Metrics Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             <MetricCard title="Profit Latest Entry" value="$2,900" />
             <MetricCard title="Profit Last 7 Days" value="$12,450" />
             <MetricCard title="Total Revenue" value="$78,000" />
           </div>
 
           {/* Orders and Charts Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4">
             {/* Orders Section */}
-            <div className="space-y-4 md:space-y-6">
-              <h2 className="text-lg md:text-xl font-semibold text-foreground">Orders</h2>
-              <div className="space-y-3 md:space-y-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg md:text-xl font-semibold text-foreground">Orders</CardTitle>
+                <span className="text-xs md:text-sm text-muted-foreground">3 active orders</span>
+              </CardHeader>
+              <CardContent className="space-y-2 md:space-y-3">
                 <ServiceCard
                   name="iPhone 15 Pro"
                   icon={Utensils}
@@ -105,13 +122,13 @@ const Index = () => {
                   variant="others"
                   action="Pick"
                 />
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
             {/* Charts Section */}
-            <div className="lg:col-span-2 space-y-4 md:space-y-6">
+            <div className="lg:col-span-2 space-y-3 md:space-y-4">
               <ProfitChart />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <RevenueChart />
                 <OrdersChart />
               </div>
@@ -119,22 +136,34 @@ const Index = () => {
           </div>
 
           {/* Snapshots Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             <Card>
               <CardHeader className="pb-3"><CardTitle>Category Mix</CardTitle></CardHeader>
               <CardContent>
-                <div className="h-56">
-                  <ChartContainer config={chartConfig}>
-                    <PieChart>
-                      <Pie data={categoryMix} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={50} outerRadius={80} labelLine={false} label={renderCategoryLabel}>
-                        {categoryMix.map((_, idx) => (
-                          <Cell key={idx} fill={colors[idx % colors.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                      <ChartLegend content={<ChartLegendContent />} />
-                    </PieChart>
-                  </ChartContainer>
+                <div className="space-y-4">
+                  <div className="h-56">
+                    <ChartContainer config={chartConfig}>
+                      <PieChart>
+                        <Pie data={categoryMix} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={40} outerRadius={75} labelLine={false} label={renderCategoryLabel}>
+                          {categoryMix.map((_, idx) => (
+                            <Cell key={idx} fill={colors[idx % colors.length]} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                      </PieChart>
+                    </ChartContainer>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    {categoryMix.map((item, idx) => (
+                      <div key={item.name} className="flex items-center gap-2">
+                        <div 
+                          className="w-3 h-3 rounded-full flex-shrink-0" 
+                          style={{ backgroundColor: colors[idx] }}
+                        />
+                        <span className="text-muted-foreground truncate">{item.name}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>

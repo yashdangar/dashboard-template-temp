@@ -5,9 +5,9 @@ import { Plane, ArrowUp } from "lucide-react";
 const activities = [
   {
     id: 1,
-    type: "Profit Lattest entree",
-    amount: "$0.0",
-    time: "5 min",
+    type: "Payment captured",
+    amount: "$96.34",
+    time: "5 min ago",
     status: "completed"
   },
   {
@@ -15,12 +15,12 @@ const activities = [
     type: "Flights",
     time: "1 hr ago",
     status: "active",
-    badge: "PTC TOI"
+    badge: "PTC → TOI"
   },
   {
     id: 3,
-    type: "Completed",
-    time: "2 hour ago",
+    type: "Order completed",
+    time: "2 hours ago",
     status: "completed"
   }
 ];
@@ -64,11 +64,11 @@ export function ActivityList() {
                 <span className="text-xs text-white font-semibold">A</span>
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs md:text-sm font-medium truncate">Allex completed</p>
-                <p className="text-xs text-muted-foreground">Active Order</p>
+                <p className="text-xs md:text-sm font-medium truncate">Alex completed</p>
+                <p className="text-xs text-muted-foreground">Active order</p>
               </div>
             </div>
-            <span className="text-xs text-muted-foreground shrink-0">3 ago</span>
+            <span className="text-xs text-muted-foreground shrink-0">3 hours ago</span>
           </div>
         </div>
       </CardContent>

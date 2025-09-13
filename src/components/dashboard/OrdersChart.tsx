@@ -22,6 +22,14 @@ export function OrdersChart() {
       <CardContent>
         <ChartContainer config={{}} className="h-32 md:h-40">
           <LineChart data={data}>
+            <defs>
+              <linearGradient id="ordersGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="oklch(0.7 0.25 180)" />
+                <stop offset="25%" stopColor="oklch(0.7 0.25 200)" />
+                <stop offset="50%" stopColor="oklch(0.6 0.2 270)" />
+                <stop offset="100%" stopColor="oklch(0.7 0.3 320)" />
+              </linearGradient>
+            </defs>
             <XAxis 
               dataKey="name" 
               axisLine={false}
@@ -33,10 +41,10 @@ export function OrdersChart() {
             <Line
               type="monotone"
               dataKey="value"
-              stroke="hsl(var(--primary))"
-              strokeWidth={2}
-              dot={{ fill: 'hsl(var(--primary))', strokeWidth: 2, r: 3 }}
-              activeDot={{ r: 4, fill: 'hsl(var(--primary))' }}
+              stroke="url(#ordersGradient)"
+              strokeWidth={4}
+              dot={{ fill: 'oklch(0.6 0.35 200)', stroke: 'oklch(0.6 0.35 200)', strokeWidth: 2, r: 3 }}
+              activeDot={{ r: 4, fill: 'oklch(0.6 0.35 200)', stroke: 'oklch(0.6 0.35 200)' }}
               className="animate-fade-in-up"
             />
           </LineChart>

@@ -137,6 +137,27 @@ All colors MUST be HSL.
     background: hsl(var(--others));
   }
 
+  /* Custom soft gradients for service cards */
+  .service-gradient {
+    background: linear-gradient(135deg, 
+      oklch(0.5 0.03 180) 0%, 
+      oklch(0.45 0.04 200) 25%, 
+      oklch(0.4 0.035 270) 50%, 
+      oklch(0.45 0.045 320) 100%);
+    filter: brightness(0.8);
+    opacity: 0.7;
+  }
+
+  .action-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.55 0.025 180 / 0.35) 0%,
+      oklch(0.50 0.030 200 / 0.35) 25%,
+      oklch(0.45 0.025 270 / 0.35) 50%,
+      oklch(0.50 0.035 320 / 0.35) 100%
+    );
+  }
+
   /* Chart animations */
   @keyframes fadeInUp {
     from {

@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { LineChart, Line, XAxis, YAxis, Area, AreaChart } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Area, AreaChart, ReferenceDot } from "recharts";
 
 const data = [
   { name: "Week 1", value: 0 },
@@ -21,16 +21,19 @@ export function ProfitChart() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={{}} className="h-48 md:h-64">
-          <AreaChart data={data}>
+          <AreaChart data={data} margin={{ top: 8, right: 20, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="oklch(0.7 0.25 200)" />
+                <stop offset="0%" stopColor="oklch(0.7 0.25 180)" />
+                <stop offset="25%" stopColor="oklch(0.7 0.25 200)" />
                 <stop offset="50%" stopColor="oklch(0.6 0.2 270)" />
                 <stop offset="100%" stopColor="oklch(0.7 0.3 320)" />
               </linearGradient>
-              <linearGradient id="fillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="oklch(0.6 0.2 270 / 0.3)" />
-                <stop offset="100%" stopColor="oklch(0.6 0.2 270 / 0.05)" />
+              <linearGradient id="fillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="oklch(0.6 0.2 180 / 0.5)" />
+                <stop offset="25%" stopColor="oklch(0.6 0.2 200 / 0.4)" />
+                <stop offset="50%" stopColor="oklch(0.6 0.2 270 / 0.3)" />
+                <stop offset="100%" stopColor="oklch(0.6 0.2 320 / 0.1)" />
               </linearGradient>
             </defs>
             <XAxis 
@@ -45,10 +48,13 @@ export function ProfitChart() {
               type="monotone"
               dataKey="value"
               stroke="url(#waveGradient)"
-              strokeWidth={2}
+              strokeWidth={4}
               fill="url(#fillGradient)"
+              dot={false}
+              activeDot={{ r: 7, fill: 'oklch(0.7 0.3 320)', stroke: 'oklch(0.7 0.3 320)' }}
               className="animate-fade-in-up"
             />
+            <ReferenceDot x="Week 7" y={85} r={7} isFront fill="oklch(0.7 0.3 320)" stroke="oklch(0.7 0.3 320)" />
           </AreaChart>
         </ChartContainer>
       </CardContent>
