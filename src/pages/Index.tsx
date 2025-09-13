@@ -251,6 +251,7 @@ const Index = () => {
 
           {/* Activity Section */}
           <ActivityList />
+          <div className="h-[15vw] md:h-[15vw]"></div>
         </div>
     </DashboardLayout>
   );
