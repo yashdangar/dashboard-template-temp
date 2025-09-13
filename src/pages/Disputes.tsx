@@ -12,6 +12,7 @@ const disputes = [
 ];
 
 export default function Disputes() {
+  
   const [query, setQuery] = useState("");
   const rows = useMemo(() => {
     const q = query.toLowerCase();
