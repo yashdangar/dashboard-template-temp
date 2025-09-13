@@ -30,15 +30,15 @@ const Index = () => {
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
     
-    // Create darker shade (reduce by 15%)
-    const darkerR = Math.max(0, Math.floor(r * 0.85));
-    const darkerG = Math.max(0, Math.floor(g * 0.85));
-    const darkerB = Math.max(0, Math.floor(b * 0.85));
+    // Create darker shade (reduce by 20% for moderate contrast)
+    const darkerR = Math.max(0, Math.floor(r * 0.8));
+    const darkerG = Math.max(0, Math.floor(g * 0.8));
+    const darkerB = Math.max(0, Math.floor(b * 0.8));
     
-    // Create lighter shade (increase by 8%)
-    const lighterR = Math.min(255, Math.floor(r * 1.08));
-    const lighterG = Math.min(255, Math.floor(g * 1.08));
-    const lighterB = Math.min(255, Math.floor(b * 1.08));
+    // Create lighter shade (increase by 12% for moderate contrast)
+    const lighterR = Math.min(255, Math.floor(r * 1.12));
+    const lighterG = Math.min(255, Math.floor(g * 1.12));
+    const lighterB = Math.min(255, Math.floor(b * 1.12));
     
     const darkerColor = `rgb(${darkerR}, ${darkerG}, ${darkerB})`;
     const lighterColor = `rgb(${lighterR}, ${lighterG}, ${lighterB})`;
@@ -176,7 +176,7 @@ const Index = () => {
                     <ChartContainer config={chartConfig}>
                       <PieChart>
                         {colors.map((color, idx) => createGradient(color, idx))}
-                        <Pie data={categoryMix} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75} labelLine={false} label={renderCategoryLabel} stroke="#000" strokeWidth={0.1}>
+                        <Pie data={categoryMix} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75} labelLine={false} stroke="#000" strokeWidth={0.1}>
                           {categoryMix.map((_, idx) => (
                             <Cell key={idx} fill={`url(#gradient-${idx})`} stroke="#000" strokeWidth={0.1} style={{ transition: "all 0.2s ease-in-out" }} />
                           ))}
@@ -184,7 +184,7 @@ const Index = () => {
                         <ChartTooltip content={<ChartTooltipContent />} />
                       </PieChart>
                     </ChartContainer>
-                  </div>
+                  </div>  
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     {categoryMix.map((item, idx) => (
                       <div key={item.name} className="flex items-center gap-2">

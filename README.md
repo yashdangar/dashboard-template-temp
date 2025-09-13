@@ -60,6 +60,14 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Features
+
+- **Light/Dark Mode**: Toggle between light and dark themes using the theme toggle button in the header or mobile navigation
+- **Responsive Design**: Fully responsive dashboard that works on desktop, tablet, and mobile devices
+- **Real-time Dashboard**: Live metrics, charts, and activity monitoring
+- **Staff Operations**: Manage and monitor staff performance and status
+- **Reports & Audits**: Comprehensive reporting and audit trail functionality
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/4d38c141-e33d-4f15-bb1b-c06a69d0759d) and click on Share -> Publish.

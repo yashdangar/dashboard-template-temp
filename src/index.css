@@ -8,25 +8,25 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dashboard Dark Theme Colors */
-    --background: 222 84% 2.5%;
-    --foreground: 210 40% 98%;
+    /* Light Theme Colors */
+    --background: 0 0% 100%;
+    --foreground: 222 84% 4.9%;
 
-    --card: 228 71% 7%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 4.9%;
 
-    --popover: 228 71% 7%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 4.9%;
 
     /* Purple-Blue Brand Colors */
     --primary: 250 84% 60%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 222 84% 4.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 84% 4.9%;
 
-    --muted: 222 84% 4%;
-    --muted-foreground: 215 16% 65%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
     --accent: 283 39% 53%;
     --accent-foreground: 210 40% 98%;
@@ -37,8 +37,8 @@ All colors MUST be HSL.
     /* Additional colors for enhanced palette */
     --success: 142 71% 45%;
 
-    --border: 228 71% 15%;
-    --input: 228 71% 12%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
     --ring: 250 84% 60%;
 
     --radius: 1rem;
@@ -55,13 +55,13 @@ All colors MUST be HSL.
     --others: 280 84% 60%;
 
     /* Sidebar Colors */
-    --sidebar-background: 222 84% 2.5%;
-    --sidebar-foreground: 210 40% 98%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222 84% 4.9%;
     --sidebar-primary: 250 84% 60%;
     --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 228 71% 10%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 228 71% 15%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 84% 4.9%;
+    --sidebar-border: 214 32% 91%;
     --sidebar-ring: 250 84% 60%;
   }
 
@@ -104,7 +104,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground dark;
+    @apply bg-background text-foreground;
   }
 
   /* Custom gradient backgrounds */
@@ -155,6 +155,27 @@ All colors MUST be HSL.
       oklch(0.50 0.030 200 / 0.35) 25%,
       oklch(0.45 0.025 270 / 0.35) 50%,
       oklch(0.50 0.035 320 / 0.35) 100%
+    );
+  }
+
+  /* Light mode specific gradients */
+  .light .service-gradient {
+    background: linear-gradient(135deg, 
+      oklch(0.95 0.02 180) 0%, 
+      oklch(0.93 0.03 200) 25%, 
+      oklch(0.92 0.025 270) 50%, 
+      oklch(0.94 0.03 320) 100%);
+    filter: brightness(1.1);
+    opacity: 0.8;
+  }
+
+  .light .action-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.96 0.015 180 / 0.4) 0%,
+      oklch(0.94 0.02 200 / 0.4) 25%,
+      oklch(0.93 0.015 270 / 0.4) 50%,
+      oklch(0.95 0.02 320 / 0.4) 100%
     );
   }
 

@@ -1,6 +1,7 @@
 import { Home, Package, FileText, Settings } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navigation = [
   { name: "Dashboard", icon: Home, href: "/" },
@@ -12,7 +13,7 @@ const navigation = [
 export function MobileNavigation() {
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border">
-      <div className="grid grid-cols-4 py-2">
+      <div className="grid grid-cols-5 py-2">
         {navigation.map((item) => {
           const Icon = item.icon;
           return (
@@ -29,6 +30,10 @@ export function MobileNavigation() {
             </NavLink>
           );
         })}
+        <div className="flex flex-col items-center justify-center py-2 px-1">
+          <ThemeToggle />
+          <span className="text-xs font-medium text-muted-foreground mt-1">Theme</span>
+        </div>
       </div>
     </div>
   );
