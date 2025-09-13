@@ -52,13 +52,16 @@ export function ServiceCard({
         
          {/* Bottom Action Button */}
          <button 
-           className={cn("flex items-center justify-between px-4 py-3 rounded-lg w-full text-left border-0 outline-none", actionStyles[variant])}
-           style={{color: '#ffffff'}}
+           className="flex items-center justify-between px-4 py-3 rounded-lg w-full text-left border-0 outline-none"
+           style={{
+             background: 'linear-gradient(135deg, oklch(0.5 0.25 180) 0%, oklch(0.5 0.25 200) 25%, oklch(0.4 0.2 270) 50%, oklch(0.5 0.3 320) 100%)',
+             color: '#ffffff'
+           }}
          >
            {time && (
-             <span className="text-sm font-bold drop-shadow-md" style={{color: '#ffffff', textShadow: '0 1px 2px rgba(0,0,0,0.8)'}}>{time}</span>
+             <span className="text-sm font-bold" style={{color: '#ffffff'}}>{time}</span>
            )}
-           <span className="text-sm font-bold drop-shadow-md" style={{color: '#ffffff', textShadow: '0 1px 2px rgba(0,0,0,0.8)'}}>{action}</span>
+           <span className="text-sm font-bold" style={{color: '#ffffff'}}>{action}</span>
          </button>
       </CardContent>
     </Card>

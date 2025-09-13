@@ -17,7 +17,7 @@ const navigation = [
 export function Sidebar({ className }: SidebarProps) {
   const location = useLocation();
   return (
-    <div className={cn("flex h-full w-64 flex-col bg-secondary border-r border-border", className)}>
+    <div className={cn("hidden md:flex h-full w-64 flex-col bg-secondary border-r border-border", className)}>
       {/* Logo */}
       <div className="flex h-16 items-center px-6">
         <div className="flex items-center space-x-2">

@@ -7,7 +7,7 @@ import { OrdersChart } from "@/components/dashboard/OrdersChart";
 import { ActivityList } from "@/components/dashboard/ActivityList";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ChartContainer, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { Utensils, Film, ShoppingBag } from "lucide-react";
 
@@ -21,6 +21,37 @@ const Index = () => {
     { name: "Clothing", value: 8 },
   ];
   const colors = ["#156082", "#E97132", "#196B24", "#0F9ED5", "#A02B93", "#4EA72E"];
+  
+  // Create gradient definitions for each color
+  const createGradient = (color: string, index: number) => {
+    // Convert hex to RGB and create darker/lighter variants
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Create darker shade (reduce by 15%)
+    const darkerR = Math.max(0, Math.floor(r * 0.85));
+    const darkerG = Math.max(0, Math.floor(g * 0.85));
+    const darkerB = Math.max(0, Math.floor(b * 0.85));
+    
+    // Create lighter shade (increase by 8%)
+    const lighterR = Math.min(255, Math.floor(r * 1.08));
+    const lighterG = Math.min(255, Math.floor(g * 1.08));
+    const lighterB = Math.min(255, Math.floor(b * 1.08));
+    
+    const darkerColor = `rgb(${darkerR}, ${darkerG}, ${darkerB})`;
+    const lighterColor = `rgb(${lighterR}, ${lighterG}, ${lighterB})`;
+    
+    return (
+      <defs key={`gradient-${index}`}>
+        <radialGradient id={`gradient-${index}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={darkerColor} />
+          <stop offset="100%" stopColor={lighterColor} />
+        </radialGradient>
+      </defs>
+    );
+  };
   
   // Chart config for legend
   const chartConfig = {
@@ -74,7 +105,7 @@ const Index = () => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
     return (
-      <text x={x} y={y} fill="#fff" textAnchor="middle" dominantBaseline="central" style={{ fontSize: 10, fontWeight: 600 }}>
+      <text x={x} y={y} fill="#fff" textAnchor="middle" dominantBaseline="central" style={{ fontSize: 8, fontWeight: 600 }}>
         {`${(percent * 100).toFixed(0)}%`}
       </text>
     );
@@ -144,12 +175,13 @@ const Index = () => {
                   <div className="h-56">
                     <ChartContainer config={chartConfig}>
                       <PieChart>
-                        <Pie data={categoryMix} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={40} outerRadius={75} labelLine={false} label={renderCategoryLabel}>
+                        {colors.map((color, idx) => createGradient(color, idx))}
+                        <Pie data={categoryMix} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75} labelLine={false} label={renderCategoryLabel} stroke="#000" strokeWidth={0.1}>
                           {categoryMix.map((_, idx) => (
-                            <Cell key={idx} fill={colors[idx % colors.length]} />
+                            <Cell key={idx} fill={`url(#gradient-${idx})`} stroke="#000" strokeWidth={0.1} style={{ transition: "all 0.2s ease-in-out" }} />
                           ))}
                         </Pie>
-                        <Tooltip />
+                        <ChartTooltip content={<ChartTooltipContent />} />
                       </PieChart>
                     </ChartContainer>
                   </div>
