@@ -1,6 +1,7 @@
 import { Bell, ChevronDown } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface HeaderProps {
   className?: string;
@@ -18,6 +19,8 @@ export function Header({ className }: HeaderProps = {}) {
           <NavLink to="/" className={({isActive}) => isActive ? "text-sm font-medium text-foreground" : "text-sm font-medium text-muted-foreground hover:text-foreground transition-smooth"}>Dashboard</NavLink>
           <NavLink to="/reports" className={({isActive}) => isActive ? "text-sm font-medium text-foreground" : "text-sm font-medium text-muted-foreground hover:text-foreground transition-smooth"}>Reports</NavLink>
         </nav>
+
+        <ThemeToggle />
 
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
